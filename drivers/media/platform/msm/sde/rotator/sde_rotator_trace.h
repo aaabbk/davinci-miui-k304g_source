@@ -21,6 +21,8 @@
 #define TRACE_INCLUDE_FILE sde_rotator_trace
 
 #include <linux/tracepoint.h>
+#include <linux/bpf.h>
+#include <trace/bpf_probe.h>
 
 DECLARE_EVENT_CLASS(rot_entry_template,
 	TP_PROTO(u32 ss_id, u32 sq_id, u32 pr_id, u32 flags,
