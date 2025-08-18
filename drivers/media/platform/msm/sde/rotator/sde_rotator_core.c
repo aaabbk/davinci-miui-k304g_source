@@ -1,5 +1,4 @@
 /* Copyright (c) 2015-2020, The Linux Foundation. All rights reserved.
- * Copyright (C) 2021 XiaoMi, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -1604,18 +1603,6 @@ static void sde_rotator_commit_handler(struct kthread_work *work)
 	if (entry->item.ts)
 		entry->item.ts[SDE_ROTATOR_TS_COMMIT] = ktime_get();
 
-	trace_rot_entry_commit(
-		entry->item.session_id, entry->item.sequence_id,
-		entry->item.wb_idx, entry->item.flags,
-		entry->item.input.format,
-		entry->item.input.width, entry->item.input.height,
-		entry->item.src_rect.x, entry->item.src_rect.y,
-		entry->item.src_rect.w, entry->item.src_rect.h,
-		entry->item.output.format,
-		entry->item.output.width, entry->item.output.height,
-		entry->item.dst_rect.x, entry->item.dst_rect.y,
-		entry->item.dst_rect.w, entry->item.dst_rect.h);
-
 	ATRACE_INT("sde_smmu_ctrl", 0);
 	ret = sde_smmu_ctrl(1);
 	if (ret < 0) {
@@ -1733,18 +1720,6 @@ static void sde_rotator_done_handler(struct kthread_work *work)
 
 	if (entry->item.ts)
 		entry->item.ts[SDE_ROTATOR_TS_DONE] = ktime_get();
-
-	trace_rot_entry_done(
-		entry->item.session_id, entry->item.sequence_id,
-		entry->item.wb_idx, entry->item.flags,
-		entry->item.input.format,
-		entry->item.input.width, entry->item.input.height,
-		entry->item.src_rect.x, entry->item.src_rect.y,
-		entry->item.src_rect.w, entry->item.src_rect.h,
-		entry->item.output.format,
-		entry->item.output.width, entry->item.output.height,
-		entry->item.dst_rect.x, entry->item.dst_rect.y,
-		entry->item.dst_rect.w, entry->item.dst_rect.h);
 
 	sde_rot_mgr_lock(mgr);
 	sde_rotator_put_hw_resource(entry->commitq, entry, entry->commitq->hw);
@@ -3177,15 +3152,15 @@ int sde_rotator_core_init(struct sde_rot_mgr **pmgr,
 		if (IS_SDE_MAJOR_MINOR_SAME(mdata->mdss_version,
 				SDE_MDP_HW_REV_500) ||
 		IS_SDE_MAJOR_MINOR_SAME(mdata->mdss_version,
-			SDE_MDP_HW_REV_620))
+				SDE_MDP_HW_REV_620))
 			mgr->max_rot_clk = 460000000UL;
 		else if (IS_SDE_MAJOR_MINOR_SAME(mdata->mdss_version,
-			SDE_MDP_HW_REV_520))
+					SDE_MDP_HW_REV_520))
 			mgr->max_rot_clk = 430000000UL;
 		else if (IS_SDE_MAJOR_MINOR_SAME(mdata->mdss_version,
-			SDE_MDP_HW_REV_530) ||
+				SDE_MDP_HW_REV_530) ||
 			IS_SDE_MAJOR_MINOR_SAME(mdata->mdss_version,
-			SDE_MDP_HW_REV_540))
+				SDE_MDP_HW_REV_540))
 			mgr->max_rot_clk = 307200000UL;
 
 		if (!(IS_SDE_MAJOR_SAME(mdata->mdss_version,
@@ -3210,8 +3185,6 @@ int sde_rotator_core_init(struct sde_rot_mgr **pmgr,
 		SDEROT_ERR("hw init failed %d\n", ret);
 		goto error_hw_init;
 	}
-
-	sde_rotator_pm_qos_add(mdata);
 
 	ret = sde_rotator_init_queue(mgr);
 	if (ret) {
