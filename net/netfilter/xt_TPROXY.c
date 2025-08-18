@@ -33,7 +33,7 @@
 #include <net/netfilter/ipv6/nf_defrag_ipv6.h>
 #endif
 
-#include <linux/netfilter/xt_TPROXY.h>
+#include <uapi/linux/netfilter/xt_TPROXY.h>
 
 enum nf_tproxy_lookup_t {
 	 NFT_LOOKUP_LISTENER,

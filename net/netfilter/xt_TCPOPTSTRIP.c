@@ -17,7 +17,7 @@
 #include <net/ipv6.h>
 #include <net/tcp.h>
 #include <linux/netfilter/x_tables.h>
-#include <linux/netfilter/xt_TCPOPTSTRIP.h>
+#include <uapi/linux/netfilter/xt_TCPOPTSTRIP.h>
 
 static inline unsigned int optlen(const u_int8_t *opt, unsigned int offset)
 {
