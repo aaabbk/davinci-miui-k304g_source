@@ -29,6 +29,7 @@
 #include "flask.h"
 #include "avc.h"
 
+#ifndef HAVE_SK_SECURITY_STRUCT
 struct task_security_struct {
 	u32 osid;		/* SID prior to last execve */
 	u32 sid;		/* current SID */
@@ -37,6 +38,8 @@ struct task_security_struct {
 	u32 keycreate_sid;	/* keycreate SID */
 	u32 sockcreate_sid;	/* fscreate SID */
 };
+#define HAVE_SK_SECURITY_STRUCT
+#endif
 
 /*
  * get the subjective security ID of the current task
