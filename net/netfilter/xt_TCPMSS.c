@@ -15,6 +15,7 @@
 #include <uapi/linux/netfilter/xt_TCPMSS.h>
 #include <uapi/linux/netfilter/xt_tcpmss.h>
 #include <linux/netfilter/x_tables.h>
+#include <uapi/linux/netfilter/xt_tcpudp.h>
 
 #include <linux/netfilter_ipv4/ip_tables.h>
 #include <linux/netfilter_ipv6/ip6_tables.h>
