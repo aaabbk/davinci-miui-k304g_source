@@ -15,8 +15,6 @@ config FS_IOMAP
 
 source "fs/ext2/Kconfig"
 source "fs/ext4/Kconfig"
-# add paper_ext4 import dioread_nolock, defrag_malloc
-source "fs/paper_ext4/Kconfig"
 source "fs/jbd2/Kconfig"
 
 config FS_MBCACHE
@@ -35,7 +33,6 @@ source "fs/ocfs2/Kconfig"
 source "fs/btrfs/Kconfig"
 source "fs/nilfs2/Kconfig"
 source "fs/f2fs/Kconfig"
-source "fs/paper_f2fs/Kconfig"
 
 config FS_DAX
 	bool "Direct Access (DAX) support"
