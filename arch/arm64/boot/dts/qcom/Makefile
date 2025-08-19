@@ -1,4 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0
+DTC_FLAGS += -I$(srctree)/include
+
 ifeq ($(TARGET_BOARD_TYPE),auto)
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 	dtbo-$(CONFIG_ARCH_SM8150) += \
